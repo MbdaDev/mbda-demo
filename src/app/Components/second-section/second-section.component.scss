@@ -1,0 +1,130 @@
+#second {
+  width: 100%;
+  min-width: 1200px;
+
+  padding: 2.5rem 2.7rem;
+
+  .help-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+
+    .helpers {
+      width: 12.5rem;
+
+      .title {
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      .help-list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+
+        li {
+          margin-bottom: 1.25rem;
+
+          a {
+            text-decoration: none;
+            color: #222;
+            transition: all ease-in 200ms;
+            font-weight: 400;
+            outline: none;
+            font-size: 0.875rem;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .logos-display-section {
+    margin-top: 2.5rem;
+    display: flex;
+    font-size: 0.875rem;
+    line-height: 1.75rem;
+    width: 100%;
+
+    .payment-icon-box {
+      display: flex;
+      max-width: 21.875rem;
+      flex-shrink: 0;
+      gap: 0.5rem 0.25rem;
+    }
+
+    .payment-icon {
+      height: 1.75rem;
+      width: auto;
+    }
+
+    .payment-security-box {
+      display: flex;
+      flex-wrap: wrap;
+      margin-inline-start: 1rem;
+      padding-inline-start: 1rem;
+      border-inline-start: 0.0625rem solid #dddddd;
+      gap: 0.5rem 0.25rem;
+    }
+  }
+
+  .social-and-app {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    .socials {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.5rem;
+      height: 2.5rm;
+
+      a {
+        color: #222;
+        text-decoration: none;
+
+        img {
+          height: 1.75rem;
+        }
+      }
+    }
+
+    .app-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.25rem;
+      height: 2.5rem;
+
+      .trade {
+        font-size: 0.875rem;
+
+        a {
+          color: #222;
+          font-weight: 600;
+          text-decoration: underline;
+          font-size: 0.875rem;
+        }
+      }
+
+      a {
+        color: #222;
+        text-decoration: none;
+
+        img {
+          height: 2.5rem;
+        }
+      }
+    }
+  }
+}

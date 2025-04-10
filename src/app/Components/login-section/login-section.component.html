@@ -1,0 +1,154 @@
+<section id="formContainer">
+  <!-- Background-image -->
+  <img
+    class="form-background"
+    src="https://s.alicdn.com/@img/imgextra/i1/O1CN01ukqrJD1viOwtCxZ8q_!!6000000006206-2-tps-2200-600.png"
+    alt=""
+  />
+
+  <div class="form-box-container">
+    <div class="form-box">
+      <div class="loading-state" *ngIf="showLoader">
+        <div class="loader-container">
+          <div class="loader"></div>
+        </div>
+      </div>
+
+      <form [formGroup]="loginForm">
+        <div class="qr-code-container">
+          <img
+            src="https://gw.alicdn.com/tps/i1/TB1VHK4KFXXXXbPXFXXwxCdHXXX-47-47.png"
+            alt=""
+            role="button"
+          />
+        </div>
+
+        <div class="error" *ngIf="showError">
+          <svg
+            class="sif_form-error"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="4178"
+            width="13"
+            height="13"
+          >
+            <path
+              d="M512 0C229.376 0 0 229.376 0 512s229.376 512 512 512 512-229.376 512-512S794.624 0 512 0z m218.624 672.256c15.872 15.872 15.872 41.984 0 57.856-8.192 8.192-18.432 11.776-29.184 11.776s-20.992-4.096-29.184-11.776L512 569.856l-160.256 160.256c-8.192 8.192-18.432 11.776-29.184 11.776s-20.992-4.096-29.184-11.776c-15.872-15.872-15.872-41.984 0-57.856L454.144 512 293.376 351.744c-15.872-15.872-15.872-41.984 0-57.856 15.872-15.872 41.984-15.872 57.856 0L512 454.144l160.256-160.256c15.872-15.872 41.984-15.872 57.856 0 15.872 15.872 15.872 41.984 0 57.856L569.856 512l160.768 160.256z"
+              fill="#ff4400"
+              p-id="4179"
+            ></path>
+          </svg>
+
+          <p class="fs-14">{{ errorMessage }}</p>
+        </div>
+
+        <div class="form-fields">
+          <div class="input-container number" *ngIf="useMobile">
+            <div class="label-text">
+              <p>Mobile Phone Number:</p>
+            </div>
+
+            <div class="number-container">
+              <select
+                placeholder="country code"
+                id="cars"
+                name="cars"
+                formControlName="countryCode"
+              >
+                @for (code of countryCodes; track $index) {
+                <option [value]="code.code">
+                  {{ code.code }} {{ code.countryName }}
+                </option>
+                }
+              </select>
+
+              <input
+                placeholder="Enter your email or member ID"
+                type="text"
+                formControlName="phoneNumber"
+              />
+            </div>
+          </div>
+
+          <div class="input-container" *ngIf="!useMobile">
+            <div class="label-text">
+              <p>Account:</p>
+            </div>
+
+            <input
+              placeholder="Enter your email or member ID"
+              id="first-name"
+              type="text"
+              formControlName="account"
+            />
+          </div>
+
+          <div class="input-container">
+            <div class="label-text">
+              <p>Password:</p>
+
+              <p class="forgot" role="button">
+                <a
+                  href="https://login.alibaba.com/ac/find_password.htm?spm=a2700.login.0.0.1c261afapmwOTG&scene=pc"
+                  >Forgot password?</a
+                >
+              </p>
+            </div>
+
+            <div class="password-input">
+              <span
+                class="show-password"
+                *ngIf="passwordHasValue"
+                (click)="showPassword = !showPassword"
+              >
+                <img
+                  [src]="
+                    !showPassword
+                      ? 'assets/icons/hide-password.svg'
+                      : 'assets/icons/show-password.svg'
+                  "
+                  alt=""
+                />
+              </span>
+
+              <input
+                placeholder="Enter Password"
+                id="last-name"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button role="button" (click)="submit()">Sign in</button>
+
+        <div class="options-container" role="button">
+          <p class="option" (click)="useMobile = !useMobile">
+            {{ useMobile ? "Sign in with Email" : "Mobile number sign in" }}
+          </p>
+
+          <p class="option" role="button">
+            <a
+              href="https://login.alibaba.com/reg/union_reg.htm?spm=a2700.login.0.0.1c261afapmwOTG&_regfrom=ICBU_UNION_REG&_regbizsource=main_page&_lang=en_US&return_url=https%3A%2F%2Fwww.alibaba.com%2F"
+              >Create account</a
+            >
+          </p>
+        </div>
+
+        <div class="other-options">
+          <p class="title fs-18">Sign in with:</p>
+
+          <div class="social-options">
+            <img src="assets/icons/google-icon.svg" alt="" />
+
+            <img src="assets/icons/facebook-icon.svg" alt="" />
+
+            <img src="assets/icons/linkedin-icon.svg" alt="" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<footer id="footer-section">
+  <div class="product-container">
+    <a *ngFor="let product of productLinks" [href]="product.link">
+      {{ product.name }}
+    </a>
+  </div>
+
+  <div class="policy-container">
+    <a *ngFor="let policy of policies" [href]="policy.link">
+      <span>
+        {{ policy.name }}
+      </span>
+    </a>
+  </div>
+
+  <div class="legal-section">
+    <div class="copyright">
+      © 1999-{{ currentYear }}
+      Alibaba.com。版权所有：杭州阿里巴巴海外信息技术有限公司
+    </div>
+
+    <div>增值电信业务经营许可证：浙B2-20241358</div>
+
+    <a
+      href="https://zzlz.gsxt.gov.cn/businessCheck/verifKey.do?showType=p&serial=91330108MACUEGT78K-SAIC_SHOW_10000091330108MACUEGT78K1725005320775&signData=MEQCIHmj5/76tVTLUJf9XvRrfyZRu5n5IT9//O1xw0dHqnvrAiBrY+wz63YR+yq2t7Ch6/MO3IGXROZyKAfNZMDEOHUKpg=="
+    >
+      <img
+        src="https://img.alicdn.com/tfs/TB1VtZtebH1gK0jSZFwXXc7aXXa-65-70.gif"
+      />
+    </a>
+
+    <img
+      src="https://img.alicdn.com/tfs/TB1VtZtebH1gK0jSZFwXXc7aXXa-65-70.gif"
+    />
+
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=33010002000366">
+      浙公网安备33010002000366
+    </a>
+
+    <a href="http://beian.miit.gov.cn/">浙ICP备2024067534号-3</a>
+  </div>
+</footer>

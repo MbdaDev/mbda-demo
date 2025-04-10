@@ -1,0 +1,73 @@
+<section id="mobileFormSection">
+  <form [formGroup]="loginForm">
+    <div class="error" *ngIf="showError">
+      <svg
+        class="sif_form-error"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="4178"
+        width="13"
+        height="13"
+      >
+        <path
+          d="M512 0C229.376 0 0 229.376 0 512s229.376 512 512 512 512-229.376 512-512S794.624 0 512 0z m218.624 672.256c15.872 15.872 15.872 41.984 0 57.856-8.192 8.192-18.432 11.776-29.184 11.776s-20.992-4.096-29.184-11.776L512 569.856l-160.256 160.256c-8.192 8.192-18.432 11.776-29.184 11.776s-20.992-4.096-29.184-11.776c-15.872-15.872-15.872-41.984 0-57.856L454.144 512 293.376 351.744c-15.872-15.872-15.872-41.984 0-57.856 15.872-15.872 41.984-15.872 57.856 0L512 454.144l160.256-160.256c15.872-15.872 41.984-15.872 57.856 0 15.872 15.872 15.872 41.984 0 57.856L569.856 512l160.768 160.256z"
+          fill="#ff4400"
+          p-id="4179"
+        ></path>
+      </svg>
+
+      <p class="fs-14">{{ errorMessage }}</p>
+    </div>
+
+    <div class="inputs-container">
+      <input
+        placeholder="Enter your email or member ID"
+        type="text"
+        formControlName="email"
+      />
+
+      <div class="password-input">
+        <span class="show-password" (click)="showPassword = !showPassword">
+          <img
+            [src]="
+              !showPassword
+                ? 'assets/icons/hide-password.svg'
+                : 'assets/icons/show-password.svg'
+            "
+            alt=""
+          />
+        </span>
+
+        <input
+          placeholder="Enter Password"
+          id="last-name"
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+        />
+      </div>
+    </div>
+
+    <div class="forgot-container">
+      <p class="forgot" role="button">Forgot password?</p>
+    </div>
+
+    <button role="button" (click)="submit()">Sign in</button>
+  </form>
+
+  <div class="options-button">
+    <p class="forgot" role="button">Or sign in with</p>
+  </div>
+
+  <div class="social-options">
+    <img src="assets/icons/google-icon.svg" alt="" />
+
+    <img src="assets/icons/facebook-round.svg" alt="" />
+
+    <img src="assets/icons/linkedin-round.svg" alt="" />
+  </div>
+
+  <div class="options-button">
+    <p class="forgot" role="button">Don't have an account? Register</p>
+  </div>
+</section>

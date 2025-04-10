@@ -1,0 +1,28 @@
+#mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.3rem;
+  box-shadow: 0 0 0.625rem #ddd;
+
+  .title {
+    color: #222;
+    font-weight: 700;
+  }
+
+  .feedback {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    a {
+      text-decoration: none;
+      color: #222;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+      }
+    }
+  }
+}

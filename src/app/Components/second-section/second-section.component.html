@@ -1,0 +1,70 @@
+<section id="second">
+  <div class="help-section">
+    @for (helpers of helpersList; track $index) {
+
+    <div class="helpers">
+      <h3 class="title">{{ helpers.title }}</h3>
+
+      <ul class="help-list">
+        @for (help of helpers.helps; track $index) {
+        <li>
+          <a [href]="help.helpLink" target="_blank">{{ help.helpName }}</a>
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+
+  <div class="logos-display-section">
+    <div class="payment-icon-box">
+      <img
+        class="payment-icon"
+        [src]="links"
+        *ngFor="let links of paymentIconLinks"
+      />
+    </div>
+
+    <div class="payment-security-box">
+      <img
+        class="payment-icon"
+        [src]="links"
+        *ngFor="let links of securityIcons"
+      />
+    </div>
+  </div>
+
+  <div class="social-and-app">
+    <div class="socials">
+      <a *ngFor="let social of socials" [href]="social.link" target="_blank">
+        <img [src]="social.img" alt="" />
+      </a>
+    </div>
+
+    <div class="app-section">
+      <div class="trade">
+        Trade on the go with the
+        <a href="https://app.alibaba.com/" target="_blank">Alibaba.com app</a>
+      </div>
+
+      <a
+        href="https://apps.apple.com/us/app/alibaba-for-iphone/id503451073?spm=a2700.product_home_l3.home_header.42.2ce267afj7vdoC"
+        target="_blank"
+      >
+        <img
+          src="https://s.alicdn.com/@img/imgextra/i4/O1CN01i9Aj641atkjJJ9I6y_!!6000000003388-2-tps-396-132.png"
+          alt=""
+        />
+      </a>
+
+      <a
+        href="https://play.google.com/store/apps/details?spm=a2700.product_home_l3.home_header.43.2ce267afj7vdoC&id=com.alibaba.intl.android.apps.poseidon&referrer=pcmaindownload"
+      >
+        <img
+          src="https://s.alicdn.com/@img/imgextra/i4/O1CN018KnDNq1JleFgkjLRq_!!6000000001069-2-tps-447-132.png"
+          alt=""
+        />
+      </a>
+    </div>
+  </div>
+</section>

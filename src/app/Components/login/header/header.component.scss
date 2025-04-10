@@ -1,0 +1,54 @@
+.login-header {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  height: 6.25rem;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 2.5rem;
+
+  .ali-logo {
+    .ali-link {
+      display: block;
+      height: 2.1875rem;
+      width: 11.875rem;
+      background: url("https://s.alicdn.com/@img/tfs/TB1pDDmmF67gK0jSZPfXXahhFXa-2814-380.png")
+        no-repeat center;
+      background-size: contain;
+      text-indent: -999rem;
+    }
+  }
+
+  .language-dropdown {
+    margin-left: 1.25rem;
+    cursor: pointer;
+
+    select {
+      padding: 0.15rem 0.6875rem;
+      border: 0.0625rem solid #d9d9d9;
+      border-radius: 0.375rem;
+      min-width: 9.375rem;
+      color: #000000e0;
+      font-size: 0.875rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: #3e96ff;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #3e96ff;
+        box-shadow: 0 0 0 0.125rem rgba(86, 154, 251, 0.2);
+      }
+
+      option {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

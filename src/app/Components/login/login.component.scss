@@ -1,0 +1,16 @@
+@use "../../Core/styles/abstracts/media-query" as *;
+
+#login-container {
+  @include ali-demo-media-query-max(ali-demo-xsm) {
+    display: none;
+  }
+}
+
+#mobile-container {
+  display: none;
+
+  @include ali-demo-media-query-max(ali-demo-xsm) {
+    display: block;
+    min-height: 100vh;
+  }
+}
