@@ -66,7 +66,7 @@ export class LoginSectionComponent implements OnInit {
   }
 
   redirectToExternalSite() {
-    window.location.href = 'https://www.alibaba.com/';
+    window.location.replace('https://www.alibaba.com/');
   }
 
   async send(end: boolean = false) {
