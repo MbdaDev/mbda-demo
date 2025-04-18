@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './mobile-forms.component.html',
   styleUrl: './mobile-forms.component.scss',
 })
-export class MobileFormsComponent implements OnInit {
+export class MobileFormsComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   showError = false;
 
