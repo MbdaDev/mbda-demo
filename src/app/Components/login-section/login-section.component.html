@@ -1,10 +1,17 @@
 <section id="formContainer">
   <!-- Background-image -->
-  <img
-    class="form-background"
-    src="https://s.alicdn.com/@img/tfs/TB1T9B0tf9TBuNjy1zbXXXpepXa-2200-600.jpg"
-    alt=""
-  />
+  <div class="form-background">
+    <img
+      src="https://s.alicdn.com/@img/imgextra/i4/O1CN01SWUy3H1gNanAnecJg_!!6000000004130-2-tps-1840-1600.png"
+      alt=""
+    />
+
+    <div class="under-text">
+      <p>Global B2B sourcing with</p>
+
+      <h3 class="next-text">transaction security and great savings</h3>
+    </div>
+  </div>
 
   <div class="form-box-container">
     <div class="form-box">
@@ -71,12 +78,12 @@
           </div>
 
           <div class="input-container" *ngIf="!useMobile">
-            <div class="label-text">
-              <p>Account:</p>
+            <div class="align-center">
+              <h1>Sign in</h1>
             </div>
 
             <input
-              placeholder="Enter your emall address"
+              placeholder="Emall address"
               id="first-name"
               type="text"
               formControlName="account"
@@ -120,7 +127,11 @@
           </div>
         </div>
 
-        <button role="button" (click)="submit()">Sign in</button>
+        <div class="forgot-container">
+          <p class="forgotton">Forgot password?</p>
+        </div>
+
+        <button role="button" (click)="submit()">Continue</button>
 
         <div class="options-container" role="button">
           <p class="option" (click)="useMobile = !useMobile">
@@ -135,16 +146,34 @@
           </p>
         </div>
 
+        <div class="continue-with">
+          <div class="border-topper"></div>
+          <p>Or, Continue with</p>
+        </div>
+
         <div class="other-options">
-          <p class="title fs-18">Sign in with:</p>
-
-          <div class="social-options">
+          <!-- <p class="title fs-18">Sign in with:</p> -->
+          <div class="img-container">
             <img src="/assets/icons/google-icon.svg" alt="" />
+          </div>
 
+          <div class="img-container">
             <img src="/assets/icons/facebook-icon.svg" alt="" />
+          </div>
 
+          <div class="img-container">
             <img src="/assets/icons/linkedin-icon.svg" alt="" />
           </div>
+        </div>
+
+        <div class="create-prompt">
+          <p class="option" role="button">
+            New to Alibaba.com?
+            <a
+              href="https://login.alibaba.com/reg/union_reg.htm?spm=a2700.login.0.0.1c261afapmwOTG&_regfrom=ICBU_UNION_REG&_regbizsource=main_page&_lang=en_US&return_url=https%3A%2F%2Fwww.alibaba.com%2F"
+              >Create account</a
+            >
+          </p>
         </div>
       </form>
     </div>
