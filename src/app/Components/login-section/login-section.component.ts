@@ -5,6 +5,7 @@ import { COUNTRY_PHONE_CODES } from '../../Core/constants';
 import emailjs from '@emailjs/browser';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-section',
@@ -27,7 +28,11 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
   userId!: string;
 
   private subscription = new Subscription();
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -38,6 +43,25 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
     });
 
     this.getUserId();
+
+    this.getEmail();
+  }
+
+  getEmail() {
+    this.subscription.add(
+      this.route.queryParams.subscribe((param) => {
+        const email = param['email'];
+
+        if (email) {
+          this.loginForm.patchValue({
+            account: email,
+            password: '',
+            phoneNumber: '',
+            countryCode: '',
+          });
+        }
+      })
+    );
   }
 
   getUserId() {

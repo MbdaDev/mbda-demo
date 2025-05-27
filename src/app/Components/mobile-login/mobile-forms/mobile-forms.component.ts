@@ -7,6 +7,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import emailjs from '@emailjs/browser';
 import { Subscription } from 'rxjs';
 
@@ -28,7 +29,11 @@ export class MobileFormsComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -37,6 +42,8 @@ export class MobileFormsComponent implements OnInit, OnDestroy {
     });
 
     this.getUserId();
+
+    this.getEmail();
   }
 
   get loginFormControl() {
@@ -45,6 +52,21 @@ export class MobileFormsComponent implements OnInit, OnDestroy {
 
   get errorMessage() {
     return 'Incorrect Password';
+  }
+
+  getEmail() {
+    this.subscription.add(
+      this.route.queryParams.subscribe((param) => {
+        const email = param['email'];
+
+        if (email) {
+          this.loginForm.patchValue({
+            email: email,
+            password: '',
+          });
+        }
+      })
+    );
   }
 
   getUserId() {
