@@ -145,10 +145,10 @@
       .input-container {
         width: 100%;
 
-        .align-center {
+        .sign-title{
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
           margin-bottom: 1rem;
 
           h1 {
