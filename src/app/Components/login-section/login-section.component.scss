@@ -145,7 +145,7 @@
       .input-container {
         width: 100%;
 
-        .sign-title{
+        .sign-title {
           display: flex;
           align-items: center;
           justify-content: flex-start;
@@ -297,14 +297,14 @@
     }
 
     .other-options {
-      margin-top: 1rem;
+      // margin-top: 1rem;
       display: flex;
       gap: 0.3rem;
 
       .img-container {
         flex: 1;
         padding: 1.1rem;
-        background: #f8f8f8;
+        background: #faf1f1;
         border: none;
         border-radius: 0.3rem;
         display: flex;
