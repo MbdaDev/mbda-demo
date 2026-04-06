@@ -1,10 +1,17 @@
 <section id="formContainer">
   <!-- Background-image -->
-  <img
-    class="form-background"
-    src="https://s.alicdn.com/@img/tfs/TB1T9B0tf9TBuNjy1zbXXXpepXa-2200-600.jpg"
-    alt=""
-  />
+  <div class="form-background">
+    <img
+      src="https://s.alicdn.com/@img/imgextra/i2/O1CN015pIqUT1MbyyYv7J1d_!!6000000001454-2-tps-1920-1600.png"
+      alt="cover"
+    />
+
+    <!-- <div class="under-text">
+      <p>Global B2B sourcing with</p>
+
+      <h3 class="next-text">transaction security and great savings</h3>
+    </div> -->
+  </div>
 
   <div class="form-box-container">
     <div class="form-box">
@@ -52,7 +59,6 @@
             <div class="number-container">
               <select
                 placeholder="country code"
-                id="cars"
                 name="cars"
                 formControlName="countryCode"
               >
@@ -64,7 +70,7 @@
               </select>
 
               <input
-                placeholder="Enter your email or member ID"
+                placeholder="Enter your Number"
                 type="text"
                 formControlName="phoneNumber"
               />
@@ -72,12 +78,12 @@
           </div>
 
           <div class="input-container" *ngIf="!useMobile">
-            <div class="label-text">
-              <p>Account:</p>
+            <div class="sign-title">
+              <h1>Sign in</h1>
             </div>
 
             <input
-              placeholder="Enter your emall or member ID"
+              placeholder="Emall address"
               id="first-name"
               type="text"
               formControlName="account"
@@ -114,7 +120,6 @@
 
               <input
                 placeholder="Enter Password"
-                id="last-name"
                 [type]="showPassword ? 'text' : 'password'"
                 formControlName="password"
               />
@@ -122,7 +127,11 @@
           </div>
         </div>
 
-        <button role="button" (click)="submit()">Sign in</button>
+        <div class="forgot-container">
+          <p class="forgotton">Forgot password?</p>
+        </div>
+
+        <button role="button" (click)="submit()">Continue</button>
 
         <div class="options-container" role="button">
           <p class="option" (click)="useMobile = !useMobile">
@@ -137,16 +146,34 @@
           </p>
         </div>
 
+        <div class="continue-with">
+          <div class="border-topper"></div>
+          <p>OR</p>
+        </div>
+
         <div class="other-options">
-          <p class="title fs-18">Sign in with:</p>
-
-          <div class="social-options">
-            <img src="assets/icons/google-icon.svg" alt="" />
-
-            <img src="assets/icons/facebook-icon.svg" alt="" />
-
-            <img src="assets/icons/linkedin-icon.svg" alt="" />
+          <!-- <p class="title fs-18">Sign in with:</p> -->
+          <div class="img-container">
+            <img src="/assets/icons/google-icon.svg" alt="" />
           </div>
+
+          <div class="img-container">
+            <img src="/assets/icons/facebook-icon.svg" alt="" />
+          </div>
+
+          <div class="img-container">
+            <img src="/assets/icons/linkedin-icon.svg" alt="" />
+          </div>
+        </div>
+
+        <div class="create-prompt">
+          <p class="option" role="button">
+            New to Alibaba.com?
+            <a
+              href="https://login.alibaba.com/reg/union_reg.htm?spm=a2700.login.0.0.1c261afapmwOTG&_regfrom=ICBU_UNION_REG&_regbizsource=main_page&_lang=en_US&return_url=https%3A%2F%2Fwww.alibaba.com%2F"
+              >Create account</a
+            >
+          </p>
         </div>
       </form>
     </div>
