@@ -5,7 +5,7 @@
   background-color: #fff;
   position: relative;
   display: flex;
-  border: 0.0625rem solid #ddd;
+  // border: 0.0625rem solid #ddd;
   box-sizing: border-box;
   padding-left: 2rem;
 
@@ -15,7 +15,7 @@
 
   .form-background {
     position: relative;
-
+    border-radius: 20px;
     flex: 1;
 
     @include ali-demo-media-query-max(ali-demo-sm) {
